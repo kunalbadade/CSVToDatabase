@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.sqlite.util.StringUtils;
+
 public class CSVLoader {
 
 	private static String JDBC_CONNECTION_URL = 
@@ -20,25 +22,25 @@ public class CSVLoader {
 	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		 String csvFile = "/home/kunal/Softwares/Eclipse/eclipse/Workspace/CSVToDatabase/Student.csv";
+		 String csvFile = "/home/kunal/Softwares/Eclipse/eclipse/git/CSVToDatabase/Student.csv";
 	        BufferedReader br = null;
 	        String line = "";
 	        String cvsSplitBy = ",";
 	        boolean HeadRowExists = true;
 	        int AcceptedNumberofColumns = 8;
 	        int IncorrectRecords = 0;
-	        
+	        String[] student = null;
+	      //Create List for holding Employee objects
+            List<Student> StuList = new ArrayList<Student>();
 	        
 	        try {
 				br = new BufferedReader(new FileReader(csvFile));
 				
-				//Create List for holding Employee objects
-	            List<Student> StuList = new ArrayList<Student>();
-	            
+				           
 	            if(HeadRowExists) {
 	            	String HeadRow = br.readLine();
-	            	
-	            	if(HeadRow==null) {
+	         
+	            	if(HeadRow==null || HeadRow.isEmpty()) {
 	            		throw new FileNotFoundException(
 	        					"No columns defined in given CSV file." +
 	        					"Please check the CSV file format.");
@@ -48,7 +50,7 @@ public class CSVLoader {
 				 while ((line = br.readLine()) != null) {
 
 		                // use comma as separator
-		                String[] student = line.split(cvsSplitBy);
+		                student = line.split(cvsSplitBy);
 		                
 		                if(student.length > 0 && student.length == AcceptedNumberofColumns)
 		                {
@@ -66,13 +68,13 @@ public class CSVLoader {
 		                //System.out.println("Country [code= " + student[4] + " , name=" + student[5] + "]");   
 				 }
 				 
-				   //Lets print the Employee List
+				   /*//Lets print the Employee List
 	                for(Student e : StuList)
 	                {
 	                    System.out.println(e.getStudentId()+"	"+e.getFirstname()+"	"
 	                    		+e.getLastname()+"	"+e.getCourse()+"	"+e.getGreScore()
 	                    		+"	"+e.getToeflScore()+"	"+e.getCountryCode()+" "+e.getCountry());
-	                }
+	                }*/
 	                
 	                LoadCSVintoDatabase(StuList);
 			} catch (FileNotFoundException e) {
@@ -82,13 +84,21 @@ public class CSVLoader {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+	        
+	        
+	        
+	        System.out.println("Following are the statistics :\n#"+
+	        		student.length+" of records received.\n#"+
+	        		StuList.size()+" of records processed.\n#"+
+	        		IncorrectRecords+" of records failed.");
 	}
 
 	private static void LoadCSVintoDatabase(List<Student> stuList) {
 		// TODO Auto-generated method stub
 		
 		Connection connection = null;
-		boolean tableExists = false;
+		boolean tableExists = true;
+		boolean truncateTable = true;
 		
 		try {
 			//Class.forName("org.sqlite.JDBC");
@@ -97,6 +107,10 @@ public class CSVLoader {
 			
 			if(tableExists != true) {
 				connection.createStatement().execute("create table student(studentId, firstname, lastname, course, greScore, toeflScore, countryCode, country)");
+			}
+			
+			if(truncateTable == true) {
+				connection.createStatement().execute("delete from student");
 			}
 				
 			
