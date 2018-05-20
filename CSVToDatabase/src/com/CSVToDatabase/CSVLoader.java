@@ -30,7 +30,7 @@ public class CSVLoader {
 	        int AcceptedNumberofColumns = 8;
 	        int IncorrectRecords = 0;
 	        String[] student = null;
-	      //Create List for holding Employee objects
+	      //Create List for holding Student objects
             List<Student> StuList = new ArrayList<Student>();
 	        
 	        try {
@@ -54,7 +54,7 @@ public class CSVLoader {
 		                
 		                if(student.length > 0 && student.length == AcceptedNumberofColumns)
 		                {
-		                    //Save the employee details in Employee object
+		                    //Save the student details in Student object
 		                    Student stu = new Student(Integer.parseInt(student[0]),
 		                    		student[1],student[2],student[3],
 		                            Integer.parseInt(student[4]),Integer.parseInt(student[5]),student[6],student[7]);
@@ -63,18 +63,8 @@ public class CSVLoader {
 		                else {
 		                	
 		                	IncorrectRecords++;
-		                }
-
-		                //System.out.println("Country [code= " + student[4] + " , name=" + student[5] + "]");   
+		                }   
 				 }
-				 
-				   /*//Lets print the Employee List
-	                for(Student e : StuList)
-	                {
-	                    System.out.println(e.getStudentId()+"	"+e.getFirstname()+"	"
-	                    		+e.getLastname()+"	"+e.getCourse()+"	"+e.getGreScore()
-	                    		+"	"+e.getToeflScore()+"	"+e.getCountryCode()+" "+e.getCountry());
-	                }*/
 	                
 	                LoadCSVintoDatabase(StuList);
 			} catch (FileNotFoundException e) {
