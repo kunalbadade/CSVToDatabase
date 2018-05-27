@@ -2,36 +2,32 @@ package com.CSVToDatabase;
 
 public class Student {
 	
-	private int studentId;
 	private String firstname;
 	private String lastname;
-	private String course;
-	private int greScore;
-	private int toeflScore;
-	private String countryCode;
-	private String country;
+	private String emailId;
+	private String gender;
+	private String image;
+	private String creditCard;
+	private String amount;
+	private boolean column8;
+	private boolean column9;
+	private String city;
 	
-	public Student(int studentId,String firstname,String lastname,
-	 String course,int greScore,int toeflScore,String countryCode,
-	 String country) {
+	public Student(String firstname,String lastname,String emailId,
+	 String gender,String image,String creditCard,String amount,
+	 boolean column8,boolean column9,String city) {
 		
 		super();
-		this.studentId= studentId;
 		this.firstname=firstname;
 		this.lastname=lastname;
-		this.course=course;
-		this.greScore=greScore;
-		this.toeflScore=toeflScore;
-		this.countryCode=countryCode;
-		this.country=country;
-	}
-
-	public int getStudentId() {
-		return studentId;
-	}
-
-	public void setStudentId(int studentId) {
-		this.studentId = studentId;
+		this.emailId= emailId;
+		this.gender=gender;
+		this.image=image;
+		this.creditCard=creditCard;
+		this.amount=amount;
+		this.column8=column8;
+		this.column9=column9;
+		this.city=city;
 	}
 
 	public String getFirstname() {
@@ -50,46 +46,69 @@ public class Student {
 		this.lastname = lastname;
 	}
 
-	public String getCourse() {
-		return course;
+	public String getEmailId() {
+		return emailId;
 	}
 
-	public void setCourse(String course) {
-		this.course = course;
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
 	}
 
-	public int getGreScore() {
-		return greScore;
+	public String getGender() {
+		return gender;
 	}
 
-	public void setGreScore(int greScore) {
-		this.greScore = greScore;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
-	public int getToeflScore() {
-		return toeflScore;
+	public String getImage() {
+		return image;
 	}
 
-	public void setToeflScore(int toeflScore) {
-		this.toeflScore = toeflScore;
+	public void setImage(String image) {
+		this.image = image;
 	}
 
-	public String getCountryCode() {
-		return countryCode;
+	public String getCreditCard() {
+		return creditCard;
 	}
 
-	public void setCountryCode(String countryCode) {
-		this.countryCode = countryCode;
+	public void setCreditCard(String creditCard) {
+		this.creditCard = creditCard;
 	}
 
-	public String getCountry() {
-		return country;
+	public String getAmount() {
+		return amount;
 	}
 
-	public void setCountry(String country) {
-		this.country = country;
+	public void setAmount(String amount) {
+		this.amount = amount;
 	}
-	
+
+	public boolean isColumn8() {
+		return column8;
+	}
+
+	public void setColumn8(boolean column8) {
+		this.column8 = column8;
+	}
+
+	public boolean isColumn9() {
+		return column9;
+	}
+
+	public void setColumn9(boolean column9) {
+		this.column9 = column9;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}	
 	
 
 }
